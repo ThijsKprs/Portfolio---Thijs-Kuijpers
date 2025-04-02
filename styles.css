@@ -1,0 +1,28 @@
+body {
+    background: url('/images/Background_Home.gif') no-repeat center center fixed, 
+                radial-gradient(circle, #3f3e3e, #363536, #2d2d2d, #252525, #1d1d1d);
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    font-family: 'Lato', sans-serif;
+    color: white;
+}
+
+.flex-textBoxName {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    margin-left: 10%;
+    margin-top: 19vh;
+}
+
+.flex-textBoxName h1 {
+    margin: 5px 0;
+}
+
+.TJK {
+    width: 6%;
+    height: auto;
+    position: absolute;
+margin-left: 10%;
+}
