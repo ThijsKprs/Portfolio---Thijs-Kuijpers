@@ -151,13 +151,7 @@ function onMouseClick(event) {
     if (intersects.length > 0) {
         switch (currentModelIndex) {
             case 0:
-                window.location.href = 'model1_page.html';
-                break;
-            case 1:
-                window.location.href = 'model2_page.html';
-                break;
-            case 2:
-                window.location.href = 'model3_page.html';
+                window.location.href = 'Bureaublad.html';
                 break;
         }
     }
@@ -252,3 +246,4 @@ texture.minFilter = THREE.LinearMipmapLinearFilter;
 texture.magFilter = THREE.LinearFilter;
 texture.anisotropy = renderer.capabilities.getMaxAnisotropy();
 
+renderer.setPixelRatio(window.devicePixelRatio);
