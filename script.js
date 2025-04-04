@@ -6,18 +6,32 @@ const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100);
 camera.position.z = 3;
 
-const renderer = new THREE.WebGLRenderer({ alpha: true });
+// Improved renderer with anti-aliasing
+const renderer = new THREE.WebGLRenderer({ 
+  alpha: true,
+  antialias: true // Enable anti-aliasing
+});
 renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(window.devicePixelRatio); // Set pixel ratio for better quality
 document.getElementById('three-container').appendChild(renderer.domElement);
 
-// Lighting
-scene.add(new THREE.AmbientLight(0xffffff, 1));
+// Enhanced lighting setup
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+scene.add(ambientLight);
+
+const directionalLight = new THREE.DirectionalLight(0xffffff, 1.1);
+directionalLight.position.set(5, 10, 7);
+scene.add(directionalLight);
+
+const pointLight = new THREE.PointLight(0xffffff, 1.0, 100);
+pointLight.position.set(-5, 5, 5);
+scene.add(pointLight);
 
 const loader = new THREE.GLTFLoader();
 const models = [];
 let currentModelIndex = 0;
 
-// Function to load a model
+// Function to load a model with improved material handling
 function loadModel(path, rotationY, rotationX, position, scale, redirectUrl) {
     return new Promise((resolve, reject) => {
         loader.load(path, (gltf) => {
@@ -26,6 +40,24 @@ function loadModel(path, rotationY, rotationX, position, scale, redirectUrl) {
             model.scale.set(scale.x, scale.y, scale.z);
             model.rotation.set(rotationX, rotationY, 0);
             model.visible = false; // Start hidden
+
+            // Enhance model materials for better quality
+            model.traverse((node) => {
+                if (node.isMesh && node.material) {
+                    // Improve material settings
+                    node.material.flatShading = false;
+                    
+                    // Improve texture quality if textures exist
+                    if (node.material.map) {
+                        node.material.map.anisotropy = renderer.capabilities.getMaxAnisotropy();
+                        node.material.map.minFilter = THREE.LinearMipmapLinearFilter;
+                        node.material.map.magFilter = THREE.LinearFilter;
+                    }
+                    
+                    // Ensure material updates
+                    node.material.needsUpdate = true;
+                }
+            });
 
             model.userData = { redirectUrl: redirectUrl };
 
@@ -54,14 +86,14 @@ Promise.all([
     }
 }).catch(console.error);
 
-
-
-
-
 // Function to set opacity with a transition
 function setOpacity(model, value) {
     model.traverse((child) => {
         if (child.isMesh) {
+            // Ensure we don't cause material issues when changing opacity
+            if (!child.material.transparent && value < 1) {
+                child.material.transparent = true;
+            }
             gsap.to(child.material, { opacity: value, duration: 0.5, ease: "power2.inOut" });
         }
     });
@@ -77,7 +109,6 @@ function updateActiveDot() {
     dots.forEach(dot => dot.classList.remove('active'));
     dots[currentModelIndex].classList.add('active');
 }
-
 
 // Transition between models with sliding and opacity effect
 function transitionToModel(newIndex, direction) {
@@ -111,7 +142,6 @@ function transitionToModel(newIndex, direction) {
     updateActiveDot();
 }
 
-
 function showNextModel() {
     const newIndex = currentModelIndex + 1;
     if (newIndex >= models.length) {
@@ -120,10 +150,9 @@ function showNextModel() {
     } else {
         // Show the right (next) button if not at the last model
         document.getElementById('right-button').style.display = 'inline-block';
+        transitionToModel(newIndex, 'right');
     }
-    transitionToModel(newIndex, 'right');
 }
-
 
 // Show previous model
 function showPreviousModel() {
@@ -132,7 +161,6 @@ function showPreviousModel() {
     document.getElementById('right-button').style.display = 'inline-block';
     transitionToModel(newIndex, 'left');
 }
-
 
 // Raycasting for model clicks
 const raycaster = new THREE.Raycaster();
@@ -183,6 +211,14 @@ document.addEventListener('mousemove', (event) => {
     mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
 });
 
+// Handle window resizing properly
+window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(window.devicePixelRatio);
+});
+
 // Animation loop
 function animate() {
     requestAnimationFrame(animate);
@@ -196,54 +232,3 @@ function animate() {
 
     renderer.render(scene, camera);
 }
-
-// Add a stronger directional light
-const directionalLight = new THREE.DirectionalLight(0xffffff, 1.1); // Increase intensity from typical 1.0 to 1.5
-directionalLight.position.set(5, 10, 7);
-scene.add(directionalLight);
-
-// Add ambient light to brighten shadows
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.6); // Increase from typical 0.3-0.4 to 0.6
-scene.add(ambientLight);
-
-// Optional: Add a point light for additional illumination
-const pointLight = new THREE.PointLight(0xffffff, 1.0, 100);
-pointLight.position.set(-5, 5, 5);
-scene.add(pointLight);
-
-existingLight.intensity = 2.0;
-
-// When your model is loaded
-loader.load('your-model-path.glb', function(gltf) {
-    const model = gltf.scene;
-    
-    // Make materials more responsive to light
-    model.traverse((node) => {
-        if (node.isMesh && node.material) {
-            // Brighten material if needed
-            if (node.material.color) {
-                node.material.color.multiplyScalar(3.0); // Brighten color by 20%
-            }
-            
-            // Ensure materials update with lighting
-            node.material.needsUpdate = true;
-        }
-    });
-    
-    scene.add(model);
-});
-
-renderer.toneMappingExposure = 5.0; // Increase from default 1.0
-
-/* Minder pixelated */
-
-renderer.setPixelRatio(window.devicePixelRatio);
-renderer.setSize(window.innerWidth, window.innerHeight);
-
-const textureLoader = new THREE.TextureLoader();
-const texture = textureLoader.load('texture.jpg');
-texture.minFilter = THREE.LinearMipmapLinearFilter;
-texture.magFilter = THREE.LinearFilter;
-texture.anisotropy = renderer.capabilities.getMaxAnisotropy();
-
-renderer.setPixelRatio(window.devicePixelRatio);
