@@ -1,6 +1,6 @@
 body {
     background: url('/images/Background_Home.gif') no-repeat center center fixed, 
-                radial-gradient(circle, #3f3e3e, #363536, #2d2d2d, #252525, #1d1d1d);
+    rgb(27, 27, 27);
     background-size: cover;
     margin: 0;
     padding: 0;
@@ -24,7 +24,7 @@ body {
     width: 6%;
     height: auto;
     position: absolute;
-margin-left: 10%;
+    margin-left: 10%;
 }
 
 /* Three js */
@@ -51,7 +51,7 @@ margin-left: 10%;
 }
 
 .nav-button {
-display: none;
+    display: none;
 }
 
 
@@ -86,4 +86,36 @@ display: none;
     position: absolute;
     margin-top: 0%;
     margin-left: 0%;
+    z-index: 1;
+}
+
+/* Map styles */
+
+.image-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-100%, -170%);
+    z-index: 2;
+}
+
+.image-row img {
+    width: 100px;
+    height: auto;
+    object-fit: cover;
+}
+
+.lower {
+    transform: translateY(10px);
+}
+
+/* Map (geopend) */
+
+.openedMap {
+    position: absolute;
+    height: 100%;
 }
