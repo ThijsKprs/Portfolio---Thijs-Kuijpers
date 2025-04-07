@@ -11,7 +11,19 @@ const renderer = new THREE.WebGLRenderer({
 });
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(window.devicePixelRatio); // Set pixel ratio for better quality
-document.getElementById('three-container').appendChild(renderer.domElement);
+
+// Check if container exists
+const container = document.getElementById('three-container');
+if (!container) {
+  console.error('Container element #three-container not found!');
+  // Create container if missing
+  const newContainer = document.createElement('div');
+  newContainer.id = 'three-container';
+  document.body.appendChild(newContainer);
+  newContainer.appendChild(renderer.domElement);
+} else {
+  container.appendChild(renderer.domElement);
+}
 
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
 scene.add(ambientLight);
@@ -38,23 +50,29 @@ loadingElement.style.fontSize = '24px';
 loadingElement.textContent = 'Loading model...';
 document.body.appendChild(loadingElement);
 
+// Get the base URL for the current page to handle relative paths properly
+const baseUrl = window.location.href.substring(0, window.location.href.lastIndexOf('/') + 1);
+console.log('Base URL for resources:', baseUrl);
+
 function loadModel(path, rotationY, rotationX, position, scale, redirectUrl) {
+    // Convert relative path to absolute path for public hosting
+    const absolutePath = new URL(path, baseUrl).href;
+    console.log('Attempting to load model from:', absolutePath);
+    
     return new Promise((resolve, reject) => {
-        // Log to verify path
-        console.log('Loading model from path:', path);
-        
         loader.load(
-            path, 
+            absolutePath, 
             (gltf) => {
                 console.log('Model loaded successfully:', gltf);
                 const model = gltf.scene;
                 model.position.set(position.x, position.y, position.z);
                 model.scale.set(scale.x, scale.y, scale.z);
                 model.rotation.set(rotationX, rotationY, 0);
-                model.visible = true; // Changed to true to ensure visibility
+                model.visible = true;
 
                 model.traverse((node) => {
                     if (node.isMesh && node.material) {
+                        // Make sure materials are visible
                         node.material.flatShading = false;
                         
                         if (node.material.map) {
@@ -75,9 +93,14 @@ function loadModel(path, rotationY, rotationX, position, scale, redirectUrl) {
             }, 
             (xhr) => {
                 // Add progress tracking
-                const percentComplete = (xhr.loaded / xhr.total) * 100;
-                console.log(`${Math.round(percentComplete)}% loaded`);
-                loadingElement.textContent = `Loading model... ${Math.round(percentComplete)}%`;
+                if (xhr.lengthComputable) {
+                    const percentComplete = (xhr.loaded / xhr.total) * 100;
+                    console.log(`${Math.round(percentComplete)}% loaded`);
+                    loadingElement.textContent = `Loading model... ${Math.round(percentComplete)}%`;
+                } else {
+                    console.log(`Loaded ${xhr.loaded} bytes`);
+                    loadingElement.textContent = `Loading model... ${Math.round(xhr.loaded / 1024)} KB loaded`;
+                }
             },
             (error) => {
                 console.error('Error loading model:', error);
@@ -88,27 +111,48 @@ function loadModel(path, rotationY, rotationX, position, scale, redirectUrl) {
     });
 }
 
-// Check if model directory exists and is accessible
-fetch('./models/model1.gltf')
-    .then(response => {
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        console.log('Model file is accessible');
-        return response;
-    })
-    .catch(error => {
-        console.error('Could not access model file:', error);
-        loadingElement.textContent = 'Error: Could not access model file. Check the path.';
-    });
+// Check if model path is accessible
+// Try multiple possible paths
+const possiblePaths = [
+    './models/model1.gltf',
+    '/models/model1.gltf',
+    '../models/model1.gltf',
+    'models/model1.gltf'
+];
 
-Promise.all([
-    loadModel('./models/model1.gltf', -Math.PI / 4, Math.PI / 8, { x: 0, y: -0.3, z: 0 }, { x: 6, y: 6, z: 6 }, 'model1_page.html'),
-]).then((loadedModels) => {
+let modelPathFound = false;
+
+// Try each path and use the first one that works
+Promise.all(possiblePaths.map(path => {
+    const absolutePath = new URL(path, baseUrl).href;
+    return fetch(absolutePath)
+        .then(response => {
+            if (response.ok) {
+                console.log(`Found model at: ${absolutePath}`);
+                return path;
+            }
+            throw new Error(`HTTP error! status: ${response.status}`);
+        })
+        .catch(() => null);
+}))
+.then(results => {
+    // Filter out null results
+    const validPaths = results.filter(path => path !== null);
+    
+    if (validPaths.length > 0) {
+        console.log(`Using model path: ${validPaths[0]}`);
+        return loadModel(validPaths[0], -Math.PI / 4, Math.PI / 8, { x: 0, y: -0.3, z: 0 }, { x: 6, y: 6, z: 6 }, 'model1_page.html');
+    } else {
+        // If no valid paths, try the original path anyway
+        console.warn('Could not verify model path. Attempting original path as fallback.');
+        return loadModel('./models/model1.gltf', -Math.PI / 4, Math.PI / 8, { x: 0, y: -0.3, z: 0 }, { x: 6, y: 6, z: 6 }, 'model1_page.html');
+    }
+})
+.then((loadedModel) => {
     // Remove loading indicator
     document.body.removeChild(loadingElement);
     
-    console.log('All models loaded:', loadedModels);
+    console.log('Model loaded:', loadedModel);
     if (models.length > 0) {
         models[0].model.visible = true;
         console.log('First model is now visible');
@@ -117,11 +161,13 @@ Promise.all([
 
     updateActiveDot();
 
-    if (currentModelIndex === models.length - 1) {
-        document.getElementById('right-button').style.display = 'none';
+    const rightButton = document.getElementById('right-button');
+    if (rightButton && currentModelIndex === models.length - 1) {
+        rightButton.style.display = 'none';
     }
-}).catch(error => {
-    console.error('Error in Promise.all:', error);
+})
+.catch(error => {
+    console.error('Error in model loading process:', error);
     loadingElement.textContent = 'Failed to load models. Check console for details.';
 });
 
@@ -136,7 +182,6 @@ function setOpacity(model, value) {
                 gsap.to(child.material, { opacity: value, duration: 0.5, ease: "power2.inOut" });
             } else {
                 child.material.opacity = value;
-                console.warn('GSAP not available, opacity set directly');
             }
         }
     });
@@ -174,7 +219,6 @@ function transitionToModel(newIndex, direction) {
     } else {
         currentModel.position.x = direction === 'left' ? -3 : 3;
         nextModel.position.x = 0;
-        console.warn('GSAP not available, position set directly');
     }
     
     setOpacity(currentModel, 0);
