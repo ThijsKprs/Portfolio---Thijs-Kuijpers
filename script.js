@@ -1,12 +1,10 @@
-// Import GSAP (Ensure it's in your HTML if not already included)
-// <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
-// Create scene, camera, and renderer
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100);
 camera.position.z = 3;
 
-// Improved renderer with anti-aliasing
 const renderer = new THREE.WebGLRenderer({ 
   alpha: true,
   antialias: true // Enable anti-aliasing
@@ -15,102 +13,149 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(window.devicePixelRatio); // Set pixel ratio for better quality
 document.getElementById('three-container').appendChild(renderer.domElement);
 
-// Enhanced lighting setup
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
 scene.add(ambientLight);
 
 const directionalLight = new THREE.DirectionalLight(0xffffff, 1.1);
-directionalLight.position.set(5, 10, 7);
+directionalLight.position.set(10, 10, 20);
 scene.add(directionalLight);
 
 const pointLight = new THREE.PointLight(0xffffff, 1.0, 100);
 pointLight.position.set(-5, 5, 5);
 scene.add(pointLight);
 
-const loader = new THREE.GLTFLoader();
+const loader = new GLTFLoader();
 const models = [];
 let currentModelIndex = 0;
 
-// Function to load a model with improved material handling
+// Add loading indicator
+const loadingElement = document.createElement('div');
+loadingElement.style.position = 'absolute';
+loadingElement.style.top = '50%';
+loadingElement.style.left = '50%';
+loadingElement.style.transform = 'translate(-50%, -50%)';
+loadingElement.style.fontSize = '24px';
+loadingElement.textContent = 'Loading model...';
+document.body.appendChild(loadingElement);
+
 function loadModel(path, rotationY, rotationX, position, scale, redirectUrl) {
     return new Promise((resolve, reject) => {
-        loader.load(path, (gltf) => {
-            const model = gltf.scene;
-            model.position.set(position.x, position.y, position.z);
-            model.scale.set(scale.x, scale.y, scale.z);
-            model.rotation.set(rotationX, rotationY, 0);
-            model.visible = false; // Start hidden
+        // Log to verify path
+        console.log('Loading model from path:', path);
+        
+        loader.load(
+            path, 
+            (gltf) => {
+                console.log('Model loaded successfully:', gltf);
+                const model = gltf.scene;
+                model.position.set(position.x, position.y, position.z);
+                model.scale.set(scale.x, scale.y, scale.z);
+                model.rotation.set(rotationX, rotationY, 0);
+                model.visible = true; // Changed to true to ensure visibility
 
-            // Enhance model materials for better quality
-            model.traverse((node) => {
-                if (node.isMesh && node.material) {
-                    // Improve material settings
-                    node.material.flatShading = false;
-                    
-                    // Improve texture quality if textures exist
-                    if (node.material.map) {
-                        node.material.map.anisotropy = renderer.capabilities.getMaxAnisotropy();
-                        node.material.map.minFilter = THREE.LinearMipmapLinearFilter;
-                        node.material.map.magFilter = THREE.LinearFilter;
+                model.traverse((node) => {
+                    if (node.isMesh && node.material) {
+                        node.material.flatShading = false;
+                        
+                        if (node.material.map) {
+                            node.material.map.anisotropy = renderer.capabilities.getMaxAnisotropy();
+                            node.material.map.minFilter = THREE.LinearMipmapLinearFilter;
+                            node.material.map.magFilter = THREE.LinearFilter;
+                        }
+                        
+                        node.material.needsUpdate = true;
                     }
-                    
-                    // Ensure material updates
-                    node.material.needsUpdate = true;
-                }
-            });
+                });
 
-            model.userData = { redirectUrl: redirectUrl };
+                model.userData = { redirectUrl: redirectUrl };
 
-            models.push({ model, initialRotationY: rotationY, initialRotationX: rotationX });
-            scene.add(model); // Add to scene
-            resolve(model);
-        }, undefined, reject);
+                models.push({ model, initialRotationY: rotationY, initialRotationX: rotationX });
+                scene.add(model); // Add to scene
+                resolve(model);
+            }, 
+            (xhr) => {
+                // Add progress tracking
+                const percentComplete = (xhr.loaded / xhr.total) * 100;
+                console.log(`${Math.round(percentComplete)}% loaded`);
+                loadingElement.textContent = `Loading model... ${Math.round(percentComplete)}%`;
+            },
+            (error) => {
+                console.error('Error loading model:', error);
+                loadingElement.textContent = 'Error loading model. Check console for details.';
+                reject(error);
+            }
+        );
     });
 }
 
-// Load models and ensure at least one is visible
+// Check if model directory exists and is accessible
+fetch('./models/model1.gltf')
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        console.log('Model file is accessible');
+        return response;
+    })
+    .catch(error => {
+        console.error('Could not access model file:', error);
+        loadingElement.textContent = 'Error: Could not access model file. Check the path.';
+    });
+
 Promise.all([
     loadModel('./models/model1.gltf', -Math.PI / 4, Math.PI / 8, { x: 0, y: -0.3, z: 0 }, { x: 6, y: 6, z: 6 }, 'model1_page.html'),
-]).then(() => {
+]).then((loadedModels) => {
+    // Remove loading indicator
+    document.body.removeChild(loadingElement);
+    
+    console.log('All models loaded:', loadedModels);
     if (models.length > 0) {
         models[0].model.visible = true;
+        console.log('First model is now visible');
     }
     animate();
 
-    // Update the dot state on initial load
     updateActiveDot();
 
-    // Hide the right button if we are on the last model
     if (currentModelIndex === models.length - 1) {
         document.getElementById('right-button').style.display = 'none';
     }
-}).catch(console.error);
+}).catch(error => {
+    console.error('Error in Promise.all:', error);
+    loadingElement.textContent = 'Failed to load models. Check console for details.';
+});
 
-// Function to set opacity with a transition
 function setOpacity(model, value) {
     model.traverse((child) => {
         if (child.isMesh) {
-            // Ensure we don't cause material issues when changing opacity
             if (!child.material.transparent && value < 1) {
                 child.material.transparent = true;
             }
-            gsap.to(child.material, { opacity: value, duration: 0.5, ease: "power2.inOut" });
+            // Check if gsap is available
+            if (typeof gsap !== 'undefined') {
+                gsap.to(child.material, { opacity: value, duration: 0.5, ease: "power2.inOut" });
+            } else {
+                child.material.opacity = value;
+                console.warn('GSAP not available, opacity set directly');
+            }
         }
     });
 }
 
-// Hide all models
 function hideAllModels() {
     models.forEach(({ model }) => model.visible = false);
 }
 
 function updateActiveDot() {
     const dots = document.querySelectorAll('.dot');
-    dots.forEach(dot => dot.classList.remove('active'));
-    dots[currentModelIndex].classList.add('active');
+    if (dots.length > 0) {
+        dots.forEach(dot => dot.classList.remove('active'));
+        if (dots[currentModelIndex]) {
+            dots[currentModelIndex].classList.add('active');
+        }
+    }
 }
 
-// Transition between models with sliding and opacity effect
 function transitionToModel(newIndex, direction) {
     if (newIndex === currentModelIndex) return;
 
@@ -119,17 +164,20 @@ function transitionToModel(newIndex, direction) {
 
     if (!currentModel || !nextModel) return;
 
-    // Move new model off-screen and make it transparent
     nextModel.position.x = direction === 'left' ? 3 : -3;
     nextModel.visible = true;
     setOpacity(nextModel, 0);
 
-    // Animate current model sliding out and fading out
-    gsap.to(currentModel.position, { x: direction === 'left' ? -3 : 3, duration: 0.5, ease: "power2.inOut" });
+    if (typeof gsap !== 'undefined') {
+        gsap.to(currentModel.position, { x: direction === 'left' ? -3 : 3, duration: 0.5, ease: "power2.inOut" });
+        gsap.to(nextModel.position, { x: 0, duration: 0.5, ease: "power2.inOut" });
+    } else {
+        currentModel.position.x = direction === 'left' ? -3 : 3;
+        nextModel.position.x = 0;
+        console.warn('GSAP not available, position set directly');
+    }
+    
     setOpacity(currentModel, 0);
-
-    // Animate new model sliding in and fading in
-    gsap.to(nextModel.position, { x: 0, duration: 0.5, ease: "power2.inOut" });
     setOpacity(nextModel, 1);
 
     setTimeout(() => {
@@ -138,31 +186,28 @@ function transitionToModel(newIndex, direction) {
 
     currentModelIndex = newIndex;
 
-    // Update active dot
     updateActiveDot();
 }
 
 function showNextModel() {
     const newIndex = currentModelIndex + 1;
     if (newIndex >= models.length) {
-        // Hide the right (next) button when at the last model
-        document.getElementById('right-button').style.display = 'none';
+        const rightButton = document.getElementById('right-button');
+        if (rightButton) rightButton.style.display = 'none';
     } else {
-        // Show the right (next) button if not at the last model
-        document.getElementById('right-button').style.display = 'inline-block';
+        const rightButton = document.getElementById('right-button');
+        if (rightButton) rightButton.style.display = 'inline-block';
         transitionToModel(newIndex, 'right');
     }
 }
 
-// Show previous model
 function showPreviousModel() {
     const newIndex = (currentModelIndex - 1 + models.length) % models.length;
-    // Always show the left button since it will be useful when moving back
-    document.getElementById('right-button').style.display = 'inline-block';
+    const rightButton = document.getElementById('right-button');
+    if (rightButton) rightButton.style.display = 'inline-block';
     transitionToModel(newIndex, 'left');
 }
 
-// Raycasting for model clicks
 const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
 
@@ -185,7 +230,6 @@ function onMouseClick(event) {
     }
 }
 
-// Cursor change when hovering over a model
 function onMouseMove(event) {
     mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
     mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
@@ -197,13 +241,15 @@ function onMouseMove(event) {
     document.body.style.cursor = intersects.length > 0 ? 'pointer' : 'auto';
 }
 
-// Event listeners
-document.getElementById('left-button').addEventListener('click', showPreviousModel);
-document.getElementById('right-button').addEventListener('click', showNextModel);
+// Check if buttons exist before adding event listeners
+const leftButton = document.getElementById('left-button');
+const rightButton = document.getElementById('right-button');
+if (leftButton) leftButton.addEventListener('click', showPreviousModel);
+if (rightButton) rightButton.addEventListener('click', showNextModel);
+
 window.addEventListener('click', onMouseClick);
 window.addEventListener('mousemove', onMouseMove);
 
-// Mouse movement event to adjust rotation
 let mouseX = 0, mouseY = 0;
 
 document.addEventListener('mousemove', (event) => {
@@ -211,7 +257,6 @@ document.addEventListener('mousemove', (event) => {
     mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
 });
 
-// Handle window resizing properly
 window.addEventListener('resize', () => {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
@@ -219,7 +264,6 @@ window.addEventListener('resize', () => {
     renderer.setPixelRatio(window.devicePixelRatio);
 });
 
-// Animation loop
 function animate() {
     requestAnimationFrame(animate);
 
@@ -232,3 +276,5 @@ function animate() {
 
     renderer.render(scene, camera);
 }
+
+animate();
