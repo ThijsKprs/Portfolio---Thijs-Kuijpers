@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script type="module" src="Script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.0/gsap.min.js"></script>
+    
+    <script type="importmap">
+        {
+          "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@latest/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@latest/examples/jsm/",
+            "gsap": "https://cdn.skypack.dev/gsap",
+            "gsap/ScrollTrigger": "https://cdn.skypack.dev/gsap/ScrollTrigger"
+          }
+        }
+      </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thijs Kuijpers</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header class="flex-textBoxName">
+        <h1>Thijs Kuijpers'</h1>
+        <h1>workspace</h1>
+    </header>
+    <img class="TJK" src="/images/TJK_Animation.gif" alt="TJK">
+    </div>
+
+    <div id="wrapper"></div>
+        
+    <div id="three-container"></div>
+    <div id="dot-container"></div>
+        
+    <button id="left-button" class="nav-button">&#9664;</button>
+    <button id="right-button" class="nav-button">&#9654;</button>
+</body>
+</html>

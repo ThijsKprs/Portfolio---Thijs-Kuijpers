@@ -1,0 +1,404 @@
+{
+    "asset": {
+        "copyright": "2020 (c) Adobe Inc.",
+        "generator": "Adobe Dimension - ef4f41a6842c60acc27c15e21adfa2a5f9da2982",
+        "version": "2.0"
+    },
+    "accessors": [
+        {
+            "bufferView": 0,
+            "componentType": 5126,
+            "count": 659832,
+            "type": "VEC3",
+            "max": [
+                1.5058456659317017,
+                0.10457366704940796,
+                0.0
+            ],
+            "min": [
+                0.0036862664856016638,
+                -0.20225457847118379,
+                -0.009999999776482582
+            ]
+        },
+        {
+            "bufferView": 1,
+            "componentType": 5126,
+            "count": 659832,
+            "type": "VEC3"
+        },
+        {
+            "bufferView": 2,
+            "componentType": 5126,
+            "count": 659832,
+            "type": "VEC2"
+        },
+        {
+            "bufferView": 3,
+            "componentType": 5125,
+            "count": 325878,
+            "type": "SCALAR",
+            "max": [
+                659770.0
+            ],
+            "min": [
+                0.0
+            ]
+        },
+        {
+            "bufferView": 4,
+            "componentType": 5125,
+            "count": 166977,
+            "type": "SCALAR",
+            "max": [
+                659831.0
+            ],
+            "min": [
+                44.0
+            ]
+        },
+        {
+            "bufferView": 5,
+            "componentType": 5125,
+            "count": 166977,
+            "type": "SCALAR",
+            "max": [
+                657689.0
+            ],
+            "min": [
+                2.0
+            ]
+        },
+        {
+            "bufferView": 6,
+            "componentType": 5126,
+            "count": 7168,
+            "type": "VEC3",
+            "max": [
+                0.9411849975585938,
+                2.019615888595581,
+                0.29999998211860659
+            ],
+            "min": [
+                -0.9411849975585938,
+                0.0,
+                -0.29999998211860659
+            ]
+        },
+        {
+            "bufferView": 7,
+            "componentType": 5126,
+            "count": 7168,
+            "type": "VEC3"
+        },
+        {
+            "bufferView": 8,
+            "componentType": 5126,
+            "count": 7168,
+            "type": "VEC2"
+        },
+        {
+            "bufferView": 9,
+            "componentType": 5125,
+            "count": 10752,
+            "type": "SCALAR",
+            "max": [
+                7167.0
+            ],
+            "min": [
+                0.0
+            ]
+        }
+    ],
+    "bufferViews": [
+        {
+            "buffer": 0,
+            "byteOffset": 0,
+            "byteLength": 7917984,
+            "target": 34962
+        },
+        {
+            "buffer": 0,
+            "byteOffset": 7917984,
+            "byteLength": 7917984,
+            "target": 34962
+        },
+        {
+            "buffer": 0,
+            "byteOffset": 15835968,
+            "byteLength": 5278656,
+            "target": 34962
+        },
+        {
+            "buffer": 0,
+            "byteOffset": 21114624,
+            "byteLength": 1303512,
+            "target": 34963
+        },
+        {
+            "buffer": 0,
+            "byteOffset": 22418136,
+            "byteLength": 667908,
+            "target": 34963
+        },
+        {
+            "buffer": 0,
+            "byteOffset": 23086044,
+            "byteLength": 667908,
+            "target": 34963
+        },
+        {
+            "buffer": 0,
+            "byteOffset": 23753952,
+            "byteLength": 86016,
+            "target": 34962
+        },
+        {
+            "buffer": 0,
+            "byteOffset": 23839968,
+            "byteLength": 86016,
+            "target": 34962
+        },
+        {
+            "buffer": 0,
+            "byteOffset": 23925984,
+            "byteLength": 57344,
+            "target": 34962
+        },
+        {
+            "buffer": 0,
+            "byteOffset": 23983328,
+            "byteLength": 43008,
+            "target": 34963
+        }
+    ],
+    "buffers": [
+        {
+            "byteLength": 24026336,
+            "uri": "LearningOutcomes_binary.bin"
+        }
+    ],
+    "cameras": [
+        {
+            "perspective": {
+                "znear": 0.00005843371036462486,
+                "yfov": 0.6024156808853149,
+                "zfar": 3.2138540744781496,
+                "aspectRatio": 1.3333333730697632
+            },
+            "type": "perspective",
+            "name": "render_camera"
+        }
+    ],
+    "images": [
+        {
+            "name": "image_image",
+            "uri": "LearningOutcomes_images/image_image.png",
+            "mimeType": "image/png"
+        },
+        {
+            "name": "image_image_0",
+            "uri": "LearningOutcomes_images/image_image_0.png",
+            "mimeType": "image/png"
+        },
+        {
+            "name": "reversible_freestanding_chalkboard_normal",
+            "uri": "LearningOutcomes_images/reversible_freestanding_chalkboard_normal.png",
+            "mimeType": "image/png"
+        }
+    ],
+    "materials": [
+        {
+            "pbrMetallicRoughness": {
+                "metallicFactor": 0.0,
+                "roughnessFactor": 0.4000000059604645
+            },
+            "name": "Default Material",
+            "doubleSided": true
+        },
+        {
+            "pbrMetallicRoughness": {
+                "baseColorFactor": [
+                    0.6307569742202759,
+                    0.6307569742202759,
+                    0.6307569742202759,
+                    1.0
+                ],
+                "metallicFactor": 0.0,
+                "roughnessFactor": 0.4000000059604645
+            },
+            "name": "Default Material 2",
+            "doubleSided": true
+        },
+        {
+            "pbrMetallicRoughness": {
+                "baseColorTexture": {
+                    "index": 0
+                },
+                "metallicRoughnessTexture": {
+                    "index": 1
+                }
+            },
+            "normalTexture": {
+                "index": 2
+            },
+            "alphaMode": "MASK",
+            "name": "reversible_freestanding_chalkboard_Mat",
+            "doubleSided": true
+        }
+    ],
+    "meshes": [
+        {
+            "name": "TextMesh#",
+            "primitives": [
+                {
+                    "attributes": {
+                        "TEXCOORD_0": 2,
+                        "NORMAL": 1,
+                        "POSITION": 0
+                    },
+                    "indices": 3,
+                    "material": 0
+                },
+                {
+                    "attributes": {
+                        "POSITION": 0,
+                        "NORMAL": 1,
+                        "TEXCOORD_0": 2
+                    },
+                    "indices": 4,
+                    "material": 1
+                },
+                {
+                    "attributes": {
+                        "TEXCOORD_0": 2,
+                        "NORMAL": 1,
+                        "POSITION": 0
+                    },
+                    "indices": 5,
+                    "material": 1
+                }
+            ]
+        },
+        {
+            "name": "reversible_freestanding_chalkboard",
+            "primitives": [
+                {
+                    "attributes": {
+                        "POSITION": 6,
+                        "NORMAL": 7,
+                        "TEXCOORD_0": 8
+                    },
+                    "indices": 9,
+                    "material": 2
+                }
+            ]
+        }
+    ],
+    "nodes": [
+        {
+            "translation": [
+                -1.5353022813796998,
+                0.30523571372032168,
+                -1.5779191255569459
+            ],
+            "rotation": [
+                -0.12059047073125839,
+                0.379409521818161,
+                0.04995020851492882,
+                0.9159756302833557
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                0.9999999403953552
+            ],
+            "camera": 0,
+            "name": "render_camera_n3d"
+        },
+        {
+            "children": [
+                2,
+                3
+            ],
+            "translation": [
+                -2.03530216217041,
+                0.005235723685473204,
+                -2.0779190063476564
+            ],
+            "name": "Group"
+        },
+        {
+            "translation": [
+                1.4782482385635377,
+                1.531655192375183,
+                1.9819704294204713
+            ],
+            "rotation": [
+                -0.008705235086381436,
+                -0.06975401937961579,
+                -0.0006087450310587883,
+                0.9975260496139526
+            ],
+            "scale": [
+                0.7926041483879089,
+                0.7926046848297119,
+                0.7926046252250671
+            ],
+            "mesh": 0,
+            "name": "Text"
+        },
+        {
+            "translation": [
+                2.035074472427368,
+                -1.346247113787058e-9,
+                2.0782394409179689
+            ],
+            "rotation": [
+                -0.008705278858542443,
+                -0.06975378841161728,
+                -0.0006087314686737955,
+                0.9975260496139526
+            ],
+            "scale": [
+                0.9999999403953552,
+                1.0,
+                0.9999998807907105
+            ],
+            "mesh": 1,
+            "name": "reversible_freestanding_chalkboard"
+        }
+    ],
+    "samplers": [
+        {},
+        {},
+        {}
+    ],
+    "scenes": [
+        {
+            "nodes": [
+                0,
+                1
+            ],
+            "name": "scene"
+        }
+    ],
+    "textures": [
+        {
+            "name": "image_image",
+            "sampler": 0,
+            "source": 0
+        },
+        {
+            "name": "image_image",
+            "sampler": 1,
+            "source": 1
+        },
+        {
+            "name": "reversible_freestanding_chalkboard_Mat::normal::image",
+            "sampler": 2,
+            "source": 2
+        }
+    ],
+    "scene": 0
+}
