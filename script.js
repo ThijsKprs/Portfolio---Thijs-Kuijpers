@@ -41,7 +41,7 @@ const pointLight = new THREE.PointLight(0xffffff, 1.0, 100);
 pointLight.position.set(-5, 5, 5);
 scene.add(pointLight);
 
-const loader = new THREE.GLTFLoader();
+const loader = new GLTFLoader();
 const models = [];
 let currentModelIndex = 0;
 
