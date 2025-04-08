@@ -1,5 +1,9 @@
 import * as THREE from 'three';
-import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+
+
+
+// Instead of imports, use the global THREE object
+
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100);
@@ -36,7 +40,7 @@ const pointLight = new THREE.PointLight(0xffffff, 1.0, 100);
 pointLight.position.set(-5, 5, 5);
 scene.add(pointLight);
 
-const loader = new GLTFLoader();
+const loader = new THREE.GLTFLoader();
 const models = [];
 let currentModelIndex = 0;
 
