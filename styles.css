@@ -120,6 +120,18 @@ body {
 
 /* iOS-style map container */
 
+.image-row {
+    display: flex;
+    flex-direction: row;
+   justify-self: center;
+   align-self: center;
+   padding-top: 8%;
+   transform: translateX(-50%);
+}
+
+
+
+
 .map-container {
     background-color: #2c2c2e;
     height: 600px;
@@ -567,5 +579,5 @@ body {
     position: absolute;
     margin-top: 0%;
     margin-left: 0%;
-    z-index: 1;
+    z-index: -10;
 }
