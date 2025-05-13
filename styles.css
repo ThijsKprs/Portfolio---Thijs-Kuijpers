@@ -111,14 +111,12 @@ body {
 .image-row {
     display: flex;
     flex-direction: row;
-   justify-self: center;
-   align-self: center;
-   padding-top: 8%;
-   transform: translateX(-50%);
+    justify-self: center;
+    align-self: center;
+    padding-top: 8%;
+    position: relative;
+    left: 15vw;
 }
-
-
-
 
 .map-container {
     background-color: #2c2c2e;
