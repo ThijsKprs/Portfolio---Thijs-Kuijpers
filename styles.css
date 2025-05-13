@@ -107,7 +107,7 @@ body {
 }
 
 /* iOS-style map container */
-
+ 
 .image-row {
     display: flex;
     flex-direction: row;
@@ -117,6 +117,7 @@ body {
     position: relative;
     left: 15vw;
 }
+
 
 .map-container {
     background-color: #2c2c2e;
