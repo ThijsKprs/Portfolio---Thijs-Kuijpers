@@ -568,3 +568,45 @@ body {
     margin-left: 0%;
     z-index: -10;
 }
+
+/* Styles project 2 */
+
+.planningUX {
+    height: 60vh;
+    width: auto;
+    margin: 2% 3%;
+}
+
+.discordSs { 
+    height: 50vh;
+    width: auto;
+    margin: 2% 0% 5% 3%;
+}
+
+.werkafspraken {
+    height: 30vh;
+    width: auto;
+    margin: 2% 0% 5% 3%;
+}
+
+.werkafsprakenTekst{
+    width: 40vw;
+    margin-top: 6%;
+}
+
+.italic{
+    font-style: italic;
+}
+
+.marginTopBottom{
+    margin-bottom: 2%;
+    margin-top: 6%;
+}
+
+.marginBottom{
+    margin-bottom: 2%;
+}
+
+.onderzoekTekst{
+    width: 50vw;
+}
