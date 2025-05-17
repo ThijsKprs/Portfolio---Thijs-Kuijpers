@@ -184,7 +184,7 @@ body {
 /* Positioning content */
 
 .content {
-    margin: 3% 3%;
+    margin: 3% 3% 2%;
 }
 
 .projectButton {
@@ -571,10 +571,20 @@ body {
 
 /* Styles project 2 */
 
+.introTextCardan{
+    margin: 3% 3%;
+    width: 50vw;
+}
+
 .planningUX {
     height: 60vh;
     width: auto;
-    margin: 2% 3%;
+    margin: 5.3% 3%;
+}
+
+.textPlanning{
+    width: 37vw;
+    margin-left: -5%;
 }
 
 .discordSs { 
@@ -594,6 +604,11 @@ body {
     margin-top: 6%;
 }
 
+.discordTekst{
+    width: 30vw;
+    margin-top: -5.5%;
+}
+
 .italic{
     font-style: italic;
 }
@@ -609,4 +624,90 @@ body {
 
 .onderzoekTekst{
     width: 50vw;
+}
+
+.onderzoekButton{
+    margin: 0% 3% 10% 0%;
+    padding: 1% 2%;
+    height: 5vh;
+    width: auto;
+    background-color: #414141;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.wireframeAndTemplates{
+    width: 50vw;
+    margin-bottom: 5%;   
+}
+
+.textWireframe{
+    width: 46vw;
+}
+
+.venster {
+    margin-top: 5%;
+    margin-bottom: 4%;
+    width: 20vw;
+    height: auto;
+}
+
+.text-container {
+    margin-top: 5%;
+    width: 60vw;
+}
+
+.textOntwerp{
+    margin: 1% 3% 0% 3%;
+    width: 45vw;
+}
+
+.textMaison{
+    margin: 1% 3% 0% 0%;
+    width: 55vw;
+}
+
+.maison{
+    width: 87vw;
+    height: auto;
+    margin: 2% 3% 0% 0%;
+}
+
+.maisonButton{
+    margin: 0% 3% 10% 0%;
+    padding: 1% 2%;
+    height: 5vh;
+    width: auto;
+    background-color: #414141;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.presentatieCardan{
+    width: 87vw;
+    height: auto;
+    margin: 2% 3%;
+}
+
+.textSmallPresentatie{
+    margin: 1% 3%;
+    width: 41.5vw;
+}
+
+.notitiesCardan{
+    width: 30vw;
+    height: auto;
+    margin: 5.4% 0% 6% 3%;
+}
+
+.textNotities{
+    width: 45vw;
 }
