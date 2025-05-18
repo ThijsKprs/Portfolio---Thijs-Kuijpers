@@ -42,7 +42,10 @@ body {
 }
 
 .app-container {
-    min-width: 80vw;
+    min-width: 85vw;
+    max-width: 85vw;
+    min-height: 85vh;
+    max-height: 85vh;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -235,6 +238,10 @@ body {
     margin: 2% 3%;
 }
 
+.textMoodboard{
+    width: 30vw;
+}
+
 .text-container {
     width: 40%;
     margin: 2% 3%;
@@ -299,11 +306,11 @@ body {
 
 .textSmallLogo {
     margin: 0.5% 3%;
-    width: 49vw;
+    width: 47svw;
 }
 
 .logoConcept {
-    width: 94%;
+    width: 80vw;
     height: auto;
     margin: 2% 0% 5% 3%;
 }
@@ -436,7 +443,7 @@ body {
 }
 
 .mockup {
-    width: 36.5vw;
+    width: 38.8vw;
     height: auto;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
@@ -448,13 +455,13 @@ body {
 }
 
 .mockupShirt {
-    width: 36.5vw;
+    width: 38.8vw;
     height: auto;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 .mockupCD {
-    width: 36.5vw;
+    width: 38.8vw;
     height: auto;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
@@ -466,9 +473,13 @@ body {
     width: 60vw;
 }
 
+.textSmallBrandguideGrid{
+    width: 30vw;
+}
+
 .brandguide {
     margin: 2% 3%;
-    width: 75vw;
+    width: 80vw;
     height: auto;
 }
 
@@ -480,7 +491,7 @@ body {
 .brandguideGrid {
     width: 30vw;
     height: auto;
-    margin: 2% 0% 0% 3%;
+    margin: 2% 0% 8% 3%;
 }
 
 .text-container {
@@ -672,7 +683,7 @@ body {
 }
 
 .maison{
-    width: 87vw;
+    width: 80vw;
     height: auto;
     margin: 2% 3% 0% 0%;
 }
@@ -692,7 +703,7 @@ body {
 }
 
 .presentatieCardan{
-    width: 87vw;
+    width: 80vw;
     height: auto;
     margin: 2% 3%;
 }
@@ -710,4 +721,111 @@ body {
 
 .textNotities{
     width: 45vw;
+}
+
+/* Portfolio page */
+
+.portfolioTextSmall{
+    margin: 1% 3%;
+    width: 55vw;
+}
+
+.portfolioTextSmall2{
+    margin: 1% 3%;
+    width: 30vw;
+}
+
+.portfolioPdfButton{
+    margin: 10% 10% 1% 3%;
+    padding: 1% 2%;
+    height: 3vh;
+    width: auto;
+    background-color: #414141;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+}
+
+.elementenText{
+    width: 50vw;
+    margin: 0% 0% 0% 3%;
+}
+
+.h3Decoration{
+    margin: 4% 2% 1% 3%;
+    text-decoration: underline;
+}
+
+.h3Decoration2{
+    margin: 0% 0% 1% 0%;
+    text-decoration: underline;
+}
+
+.gifSs{
+    width: 30vw;
+    height: auto;
+    margin: 5% 3% 0% 3%;
+}
+
+.GIFtext{
+    width: 25vw;
+}
+
+.textFigmaProces{
+    width: 50vw;
+    margin: 3% 0% 0% 3%;
+}
+
+.textFigmaProces2{
+    width: 50vw;
+    margin: 1% 0% 0% 3%;
+}
+
+.figmaTestOntwerp{
+    width:45vw;
+    height: auto;
+    margin: 5.5% 0% 0% 0%;
+}
+
+.testText{
+    width: 30vw;
+}
+
+.GIFtext2{
+    width: 19vw;
+}
+
+.testDoc{
+    width: 30vw;
+    height: auto;
+    margin: 5% 0% 0% 0%;
+}
+
+.githubButton{
+    width: 15vw;
+    height: auto;
+    margin: 0% 0% 3% 3%;
+}
+
+.textPortfolioDev{
+    width: 55vw;
+    margin: 3% 0% 0% 3%;
+}
+
+.hulpmiddelenButton{
+    margin: 3% 0% 3% 3%;
+    padding: 1% 2%;
+    height: 5vh;
+    width: auto;
+    background-color: #414141;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
