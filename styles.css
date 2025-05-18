@@ -44,7 +44,6 @@ body {
 .app-container {
     min-width: 85vw;
     max-width: 85vw;
-    min-height: 85vh;
     max-height: 85vh;
     position: absolute;
     top: 50%;
@@ -262,7 +261,7 @@ body {
 .stylescape {
     height: 50vh;
     width: auto;
-    margin: 2% 0% 5% 3%;
+    margin: 5% 0% 5% 3%;
 }
 
 .text-container {
@@ -509,6 +508,11 @@ body {
 
 .flex-textBoxName h1 {
     margin: 5px 0;
+}
+
+.textUXsmall{
+    margin: 3% 3% 3% 3%;
+    width: 50vw;
 }
 
 .TJK {
@@ -818,6 +822,7 @@ body {
 
 .hulpmiddelenButton{
     margin: 3% 0% 3% 3%;
+    margin-bottom: 6%;
     padding: 1% 2%;
     height: 5vh;
     width: auto;
@@ -828,4 +833,122 @@ body {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     cursor: pointer;
     transition: background-color 0.3s ease;
+}
+
+/* Project 3 - Development */
+
+.introTextDev{
+    margin: 3% 3% 1% 3%;
+    width: 65vw;
+}
+
+.introTextDev2{
+    margin: 0% 3%;
+    width: 54vw;
+}
+
+.largeTextProjectplan{
+    margin: 3% 3% 5% 3%;
+}
+
+.pdfProjectplanDev {
+    margin: 5% 3% 1% 3%;
+    padding: 1% 2%;
+    height: 5vh;
+    width: auto;
+    background-color: #414141;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+}
+
+.textProjectplan{
+    width: 50vw;
+    margin: 3% 0% 0% 3%;
+}
+
+.werkafsprakenDev{
+    width: 30vw;
+    height: auto;
+    margin: 5.4% 0% 0% 3%;
+}
+
+.contentConcept{    
+    margin: 3% 3% 5% 3%;
+}
+
+.textWerkafsprakenDev{
+    width: 30vw;
+    margin: 0% 0% 0% 3%;
+}
+
+.textConceptDev{   
+    margin: 1% 3% 1% 3%;
+    width: 65vw;
+}
+
+.h3DecorationDev{
+    margin: 2% 0% 0% 3%;
+    text-decoration: underline;
+}
+
+.eyetrackerTestImg {
+    width: 30%;
+    height: auto;
+    margin: 5.3% 15% 8% 3%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.textSmallDevTest{
+    margin: 1% 3%;
+    width: 55vw;
+}
+
+.placeholder{
+    width: 80vw;
+    height: auto;
+    margin: 2% 0% 0% 3%;
+}
+
+.textFigmaPr{
+    width: 23vw;
+}
+
+.figmaPrototypeSim{
+    width: 50vw;
+    height: auto;
+    margin-right: 3%;
+    margin-top: 4.5%;
+}
+
+.katMuis{
+    width: 60vw;
+    height: auto;
+    margin: 0% 0% 0% 3%;
+}
+
+.textIteratiesElementen{
+    width: 50vw;
+    margin: 1% 3% 3% 3%;
+}
+
+.h3DecorationIteraties{
+    margin: 8% 0% 1% 3%;
+    text-decoration: underline;
+}
+
+.cssDocs{
+    width: 30vw;
+    height: auto;
+    margin: 2% 0% 0% 3%;
+}
+
+.gitlabButton{
+    width: 15vw;
+    height: auto;
+    margin: 3% 0% 3% 3%;
 }
