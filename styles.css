@@ -1002,3 +1002,130 @@ body {
     width: 40vw;
     margin: 0% 0% 0% 3%;
 }
+
+/* Learning outcomes */
+
+.learningOutcomes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+    justify-content: center;
+    margin: 10% auto;
+    max-width: 80%;
+}
+
+.grid-image {
+    width: 90%; /* Vul de volledige breedte van de grid-cel */
+    height: 80%; /* Laat de hoogte automatisch aanpassen */
+    aspect-ratio: 2 / 1; /* Maak de afbeeldingen rechthoekig (2 keer zo breed als hoog) */
+    object-fit: cover; /* Zorg dat de afbeeldingen netjes worden bijgesneden */
+    border-radius: 8px; /* Optioneel: maak de hoeken afgerond */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Voeg een subtiele schaduw toe */
+}
+
+/* LO 1 */
+
+.content-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 20px;
+    margin: 0% 2% 1% 3%;
+    max-width: 100%;
+}
+
+.text-box {
+    flex: 2;
+    font-size: 16px;
+}
+
+.image-box {
+    flex: 1;
+    text-align: center;
+    position: relative;
+}
+
+.small-img {
+    position: absolute;
+    right: 60px;
+    width: 120px;
+    height: auto;
+    border-radius: 8px;
+}
+
+/* text LO */
+
+.h2LO{
+    margin: 5% 2% 1% 3%;
+    text-decoration: underline;
+}
+
+.h2Onderbouwing{
+    margin: 4% 0% 1% 3%;
+    text-decoration: underline;
+}
+
+.textLO1{
+    width: 38vw;
+    margin: 1% 3%;
+}
+
+.textLongLO1{
+    width: 54vw;
+    margin: 1% 3%;
+}
+
+/* dropdown voor links */
+
+.dropdown-menu {
+    position: relative;
+    display: inline-block;
+}
+
+.menu-button {
+    width: 100%;
+    background-color: #3c3d3d;
+    color: white;
+    padding: 8px 15px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 13%;
+}
+
+.menu-button:hover {
+    background-color: #555;
+}
+
+.menu-content {
+    display: none;
+    position: absolute;
+    background-color: #262626;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    padding: 5px 0;
+    z-index: 1000;
+    width: 100%;
+    max-height: 80px; /* Korter gemaakt */
+    overflow-y: scroll;/* Zorgt voor scrollbaarheid */
+    margin-left: 13%;
+}
+
+.menu-content a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    padding: 8px 15px;
+    font-size: 13px;
+    transition: background-color 0.3s ease;
+}
+
+.menu-content a:hover {
+    background-color: #171717;
+}
+
+.menu-content.show {
+    display: block;
+}

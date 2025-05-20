@@ -44,3 +44,18 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
   
+  /* dropdown menu voor links */
+
+  const menuButton = document.getElementById('menuButton');
+  const menuContent = document.getElementById('menuContent');
+  
+  menuButton.addEventListener('click', () => {
+      menuContent.classList.toggle('show'); // Toggle de 'show'-class om het menu te tonen of te verbergen
+  });
+  
+  // Sluit het menu als je buiten het menu klikt
+  window.addEventListener('click', (event) => {
+      if (!menuButton.contains(event.target) && !menuContent.contains(event.target)) {
+          menuContent.classList.remove('show');
+      }
+  });
