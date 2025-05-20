@@ -1056,7 +1056,7 @@ body {
 /* text LO1 */
 
 .h2LO{
-    margin: 5% 2% 1% 3%;
+    margin: 4% 2% 1% 3%;
     text-decoration: underline;
 }
 
@@ -1159,4 +1159,22 @@ body {
 
 .devButtonLO2:hover {
     background-color: #555;
+}
+
+/* LO3 text */
+
+.textLO3{
+    width: 30vw;
+    margin: 1% 3%;
+}
+
+.textLongLO3{
+    width: 60vw;
+    margin: 1% 3%;
+}
+
+.linkInfo{
+    font-size: 12px;
+    width: 20vw;
+    margin: 1% 30%;
 }
