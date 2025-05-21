@@ -1356,3 +1356,11 @@ left: 20%;
     width: 45vw;
     margin: 1% 3%;
 }
+
+/* About Me content */
+
+.aboutMeDesign{
+    width: 65vw;
+    height: auto;
+    margin: 1.5% 8% auto;
+}
