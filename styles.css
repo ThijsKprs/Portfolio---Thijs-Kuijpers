@@ -1,7 +1,7 @@
 
 
 body {
-    background: url('/images/BackgroundThijskprs_1.gif') no-repeat center center fixed,
+    background: url('/images') no-repeat center center fixed,
     rgba(10, 10, 10, 0.9);
     background-size: cover;
     margin: 0;
@@ -19,6 +19,16 @@ body {
     box-sizing: border-box;
 }
 
+.background-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -11;
+    pointer-events: none; 
+}
 
 /* PDF Button */
 
@@ -1056,12 +1066,12 @@ left: 20%;
 }
 
 .grid-image {
-    width: 90%; /* Vul de volledige breedte van de grid-cel */
-    height: 80%; /* Laat de hoogte automatisch aanpassen */
-    aspect-ratio: 2 / 1; /* Maak de afbeeldingen rechthoekig (2 keer zo breed als hoog) */
-    object-fit: cover; /* Zorg dat de afbeeldingen netjes worden bijgesneden */
-    border-radius: 8px; /* Optioneel: maak de hoeken afgerond */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Voeg een subtiele schaduw toe */
+    width: 90%;
+    height: 80%;
+    aspect-ratio: 2 / 1;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 /* LO 1 */
@@ -1334,4 +1344,15 @@ left: 20%;
 
 .menu-content2 a:hover {
     background-color: #171717;
+}
+
+/* Reflectie text */
+
+.h2Reflectie{
+    margin: 4% 2% 1% 3%;
+}
+
+.textReflectie{
+    width: 45vw;
+    margin: 1% 3%;
 }
