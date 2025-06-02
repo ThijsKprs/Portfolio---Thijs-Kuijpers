@@ -59,3 +59,19 @@ document.addEventListener('DOMContentLoaded', function() {
           menuContent.classList.remove('show');
       }
   });
+
+  /* dropdown 2 */
+
+  const menuButton2 = document.getElementById('menuButton2');
+  const menuContent2 = document.getElementById('menuContent2');
+  
+  menuButton2.addEventListener('click', () => {
+      menuContent2.classList.toggle('show'); // Toggle de 'show'-class om het menu te tonen of te verbergen
+  });
+  
+  // Sluit het menu als je buiten het menu klikt
+  window.addEventListener('click', (event) => {
+      if (!menuButton2.contains(event.target) && !menuContent2.contains(event.target)) {
+          menuContent2.classList.remove('show');
+      }
+  });
